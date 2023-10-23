@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CreateMeme Website</title>
+        <style>
+            * {
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <h2>Select your Format</h1>
+            <select id="format-selector">
+                <option value="chooseaformat">Choose a Format</option>
+                <option value="text-format">Text</option>
+            </select>
+            <h2>Select your Type</h1>
+            <select id="type-selector">
+                <option value="chooseatype">Choose a Type</option>
+                <option value="megamind">Megamind (no bitches?)</option>
+                <option value="bruh">Bruh (😐)</option>
+                <option value="bottom-text">bottom text</option>
+            </select>
+            <h2>Enter your text</h2>
+            <input type="text" id="v1-input">
+        </form>
+        <h6></h6>
+        <button id="createmymeme-button">Create my meme!</button>
+        <h2 style="display: none;" id="error-text">Error detected, go to console.</h2>
+        <h2>Final Result:</h2>
+        <h1 id="result-text" style="display: none;"></h1>
+    </body>
+    <script>
+        var formatselectorvalue = null;
+        var typeselectorvalue = null;
+        var inputvalue = null;
+        
+        function createMeme(){
+            if (formatselectorvalue == "text-format") {
+                var textformatlabel = document.getElementById('result-text')
+                if (inputvalue != "") {
+                    if (typeselectorvalue == "bottom-text") {
+                        textformatlabel.style.fontFamily = "Copperplate, Papyrus, fantasy, sans-serif"
+                        textformatlabel.style.display = "block";
+                        textformatlabel.innerText = inputvalue.toUpperCase() + "\n\nBOTTOM TEXT"
+                    }
+                    else if (typeselectorvalue == "megamind") {
+                        textformatlabel.innerText = inputvalue.toUpperCase() + "\n\n@@@@@@%############%@@@\n@@@@@%%++********+**%@@@@\n@@@@%%#*#**+++++++*#%%@@@\n@@@%%%%#***####++*%%#%@@\n@@@%%%@@#%**%#*+#%%%%%\n@@@@@@@@****#*+%@@@%%%\n@@@@@@@#==+***%%%%@@@@\n@@@@@@@%#*+**%@@@@@@@"
+                        textformatlabel.style.display = "block";
+                    }
+                    else if (typeselectorvalue == "bruh") {
+                        textformatlabel.innerText = inputvalue + "\n\nㅤㅤㅤㅤㅤㅤㅤㅤ. . . .\nㅤㅤㅤㅤㅤ. , , , , , , , , , , , , , , .\nㅤㅤㅤ, , , , , , , , , , , , , , , , , , , , , , , , \nㅤ. , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , .\nㅤ, , , , , . % % % , , , , , , % % % , , , , , , , , ,\nㅤ. , , , , . % % % , , , , , , % % % , , , , , , , , ,\nㅤ, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,\nㅤㅤ. , , # % % % % % % % % % % * . , ,\nㅤㅤㅤ, , , , , . , , , , , , , . , , , , , , , , , , ,\nㅤㅤㅤㅤㅤ  , , , , , , , , , , , , , ,"
+                        textformatlabel.style.display = "block";
+                    }
+                    else if (typeselectorvalue == "chooseatype") {
+                        document.getElementById('error-text').style.display = 'block';
+                        console.error("Error Code 1: Choice isn't a choice. (type-selector/chooseatype)");
+                    };
+                }
+                else if (inputvalue == "") {
+                    document.getElementById('error-text').style.display = 'block';
+                    console.error("Error Code 2: Input is empty. (v1-input)");
+                } 
+            }
+            else if (formatselectorvalue == "chooseaformat") {
+                document.getElementById('error-text').style.display = 'block';
+                console.error("Error Code 1: Choice isn't a choice. (format-selector/chooseaformat)");
+            };
+        };
+
+        document.getElementById('createmymeme-button').onclick = function(){
+            document.getElementById('error-text').style.display = 'none';
+            document.getElementById('result-text').style.display = "none";
+            document.getElementById('result-text').style.fontFamily = "sans-serif"
+            formatselectorvalue = document.getElementById('format-selector').value;
+            typeselectorvalue = document.getElementById('type-selector').value;
+            inputvalue = document.getElementById('v1-input').value;
+            createMeme()
+        };
+    </script>
+</html>
